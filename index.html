@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kiểm tra điều kiện mua nhà ở xã hội | Nguyễn Hữu Nhân</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f4faf6;--surface:#fff;--text:#14261c;--muted:#55695d;--brand:#1f8a4c;--brand-t:#fff;--soft:#e2f4e9;--line:#d3e6da;--ok:#16794a;--okbg:#e3f6ec;--bad:#a8321f;--badbg:#fdeae6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#0e1a13;--surface:#16261c;--text:#e8f5ec;--muted:#9bb5a5;--brand:#5fd08a;--brand-t:#0d1f15;--soft:#1c3326;--line:#28402f;--ok:#5fd59a;--okbg:#14352a;--bad:#ff9a86;--badbg:#3b1d17}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0e1a13;--surface:#16261c;--text:#e8f5ec;--muted:#9bb5a5;--brand:#5fd08a;--brand-t:#0d1f15;--soft:#1c3326;--line:#28402f;--ok:#5fd59a;--okbg:#14352a;--bad:#ff9a86;--badbg:#3b1d17}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:var(--brand)}
+.w{max-width:1000px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);background:var(--surface);border-bottom:1px solid var(--line);z-index:5}
+header .w{display:flex;align-items:center;justify-content:space-between;gap:12px;height:60px}
+.logo{font-weight:800;color:var(--brand);text-decoration:none}
+nav{display:flex;gap:18px;align-items:center}
+nav a{text-decoration:none;color:var(--muted);font-size:14px}
+.btn{display:inline-block;background:var(--brand);color:var(--brand-t);padding:11px 20px;border-radius:10px;font-weight:700;text-decoration:none;border:0;cursor:pointer;font-size:15px}
+.btn.o{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+.hero{padding:48px 0 32px}
+.tag{display:inline-block;background:var(--soft);color:var(--brand);padding:4px 12px;border-radius:99px;font-size:13px;font-weight:600}
+h1{font-size:clamp(28px,5vw,44px);line-height:1.2;margin:14px 0}
+.lead{color:var(--muted);max-width:620px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-top:32px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px}
+.stat b{display:block;font-size:30px;color:var(--brand)}
+.stat span{color:var(--muted);font-size:14px}
+section{padding:36px 0}
+h2{font-size:clamp(22px,3.5vw,30px);margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 22px}
+label{display:block;font-weight:600;margin:14px 0 6px;font-size:14px}
+select,input{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text);font:inherit}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0 16px}
+.res{margin-top:18px;padding:16px;border-radius:12px;display:none;font-weight:600}
+.res.ok{display:block;background:var(--okbg);color:var(--ok)}
+.res.bad{display:block;background:var(--badbg);color:var(--bad)}
+.big{font-size:32px;font-weight:800;color:var(--brand)}
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;counter-reset:s}
+.steps .card{counter-increment:s}
+.steps .card::before{content:counter(s);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--brand);color:var(--brand-t);font-weight:700;margin-bottom:10px}
+.steps h3{margin:0 0 6px;font-size:17px}
+.steps p{margin:0;color:var(--muted);font-size:14px}
+details{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:10px}
+summary{cursor:pointer;font-weight:600}
+details p{color:var(--muted);margin:10px 0 0}
+.contact{background:var(--brand);color:var(--brand-t);border-radius:18px;padding:32px;text-align:center}
+.contact h2{margin-bottom:6px}
+.contact .btn{background:var(--brand-t);color:var(--brand)}
+.contact .btn.o{background:transparent;color:var(--brand-t);border-color:var(--brand-t)}
+.contact .cta{justify-content:center}
+footer{padding:28px 0 40px;color:var(--muted);font-size:13px}
+.fab{display:none;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:9;box-shadow:0 6px 18px rgba(0,0,0,.25);padding:14px 22px;border-radius:99px}
+.toast{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--text);color:var(--bg);padding:12px 18px;border-radius:12px;font-weight:600;z-index:10;display:none;max-width:90%;text-align:center}
+@media(max-width:640px){nav a:not(.btn){display:none}.fab{display:inline-block}}
+</style>
+</head>
+<body>
+<header><div class="w">
+<a class="logo" href="#">🏠 Nhà ở xã hội · Nhân</a>
+<nav><a href="#kiem-tra">Kiểm tra</a><a href="#tinh">Tính góp tháng</a><a href="#hoi-dap">Hỏi đáp</a><a class="btn" href="tel:0945919408" target="_top" data-call>📞 Gọi tư vấn</a></nav>
+</div></header>
+
+<main class="w">
+<div class="hero">
+<span class="tag">Nhà ở xã hội · Cập nhật 10/2026</span>
+<h1>Bạn có đủ điều kiện mua nhà ở xã hội?</h1>
+<p class="lead">Trả lời vài câu hỏi để biết nhanh mình thuộc diện nào. Miễn phí, tính ngay trên máy của bạn, không cần đăng ký.</p>
+<div class="cta"><a class="btn" href="#kiem-tra">Kiểm tra ngay</a><a class="btn o" href="#tinh">Tính tiền góp mỗi tháng</a></div>
+<div class="stats">
+<div class="card stat"><b>25 triệu</b><span>Trần thu nhập người độc thân</span></div>
+<div class="card stat"><b>35 triệu</b><span>Độc thân nuôi con dưới 18 tuổi</span></div>
+<div class="card stat"><b>50 triệu</b><span>Tổng thu nhập vợ chồng</span></div>
+</div>
+</div>
+
+<section id="kiem-tra">
+<h2>Kiểm tra điều kiện nhanh</h2>
+<p class="sub">Thông tin chỉ xử lý trên trình duyệt của bạn, không gửi đi đâu.</p>
+<div class="card">
+<div class="row">
+<div><label for="g">Hoàn cảnh của bạn</label>
+<select id="g"><option value="25">Độc thân</option><option value="35">Độc thân, đang nuôi con dưới 18 tuổi</option><option value="50">Đã kết hôn (tính thu nhập vợ chồng)</option></select></div>
+<div><label for="inc">Thu nhập thực nhận mỗi tháng (triệu đồng)</label>
+<input id="inc" type="number" min="0" step="0.5" placeholder="Ví dụ: 18"></div>
+<div><label for="h">Tình trạng nhà ở tại nơi có dự án</label>
+<select id="h"><option value="0">Chưa có nhà</option><option value="1">Có nhà nhưng dưới 15 m²/người</option><option value="2">Đã có nhà đủ diện tích</option></select></div>
+<div><label for="p">Đã từng hưởng chính sách nhà ở xã hội?</label>
+<select id="p"><option value="0">Chưa từng</option><option value="1">Đã từng</option></select></div>
+</div>
+<button class="btn" id="chk" style="margin-top:18px">Xem kết quả</button>
+<div class="res" id="r1"></div>
+</div>
+</section>
+
+<section id="tinh">
+<h2>Tính tiền góp mỗi tháng</h2>
+<p class="sub">Công cụ minh họa theo cách trả đều (gốc + lãi). Lãi suất thực tế tùy ngân hàng và từng thời điểm.</p>
+<div class="card">
+<div class="row">
+<div><label for="pr">Giá căn hộ (triệu đồng)</label><input id="pr" type="number" value="789" min="1"></div>
+<div><label for="lp">Vay tối đa (% giá trị)</label><input id="lp" type="number" value="75" min="0" max="100"></div>
+<div><label for="rt">Lãi suất (%/năm)</label><input id="rt" type="number" value="5.4" step="0.1" min="0"></div>
+<div><label for="yr">Thời hạn vay (năm)</label><input id="yr" type="number" value="25" min="1" max="25"></div>
+</div>
+<div style="margin-top:20px">
+<div style="color:var(--muted);font-size:14px">Góp mỗi tháng (ước tính)</div>
+<div class="big" id="pm">–</div>
+<div id="ds" style="color:var(--muted);font-size:14px"></div>
+</div>
+</div>
+</section>
+
+<section>
+<h2>Từ lúc kiểm tra đến lúc nhận chìa khóa</h2>
+<p class="sub">Bốn bước chính của hành trình mua nhà ở xã hội.</p>
+<div class="steps">
+<div class="card"><h3>Kiểm tra điều kiện</h3><p>Biết mình thuộc nhóm nào và có đủ điều kiện thu nhập, nhà ở hay chưa.</p></div>
+<div class="card"><h3>Tính dòng tiền</h3><p>Ước lượng vốn tự có và số tiền góp mỗi tháng.</p></div>
+<div class="card"><h3>Chuẩn bị hồ sơ</h3><p>Xin xác nhận thu nhập, xác nhận nhà ở. Mình rà soát giúp từng giấy tờ.</p></div>
+<div class="card"><h3>Nộp hồ sơ, bốc thăm</h3><p>Chủ đầu tư nhận hồ sơ, cơ quan chức năng kiểm tra và công khai danh sách.</p></div>
+</div>
+</section>
+
+<section id="hoi-dap">
+<h2>Câu hỏi thường gặp</h2>
+<p class="sub">&nbsp;</p>
+<details><summary>Lao động tự do có mua được không?</summary><p>Được. Người không có hợp đồng lao động được xét theo diện thu nhập thấp tại đô thị, tự kê khai thu nhập và nhờ chính quyền địa phương xác nhận.</p></details>
+<details><summary>Không có hộ khẩu tại nơi có dự án thì sao?</summary><p>Luật Nhà ở 2023 đã bỏ điều kiện hộ khẩu hoặc tạm trú tại tỉnh có dự án.</p></details>
+<details><summary>Có nhà ở quê thì có được mua không?</summary><p>Điều kiện nhà ở chỉ xét tại tỉnh/thành nơi có dự án. Có nhà ở tỉnh khác vẫn được xét bình thường.</p></details>
+<details><summary>Có "suất ngoại giao" không?</summary><p>Không. Khi hồ sơ nhiều hơn số căn sẽ bốc thăm công khai. Ai hứa "chắc suất" và thu tiền là dấu hiệu lừa đảo.</p></details>
+<details><summary>Bao lâu thì được bán lại?</summary><p>Thông thường tối thiểu 5 năm kể từ khi thanh toán hết tiền mua. Trước đó chỉ được bán lại theo điều kiện quy định.</p></details>
+</section>
+
+<section>
+<div class="contact">
+<h2>Cần tư vấn trực tiếp?</h2>
+<p style="margin:0 0 4px;font-size:20px;font-weight:700">Nguyễn Hữu Nhân</p>
+<p style="margin:0">Zalo / điện thoại: <b>0945 919 408</b></p>
+<div class="cta">
+<a class="btn" href="https://zalo.me/0945919408">Nhắn Zalo</a>
+<a class="btn o" href="tel:0945919408" target="_top" data-call>📞 Gọi điện</a>
+</div>
+</div>
+</section>
+</main>
+
+<footer><div class="w">Trang này là công cụ tham khảo của tư vấn viên, không phải cơ quan nhà nước. Kết quả không thay thế việc xét duyệt hồ sơ chính thức. Quy định có thể thay đổi, vui lòng liên hệ để cập nhật mới nhất.</div></footer>
+
+<a class="btn fab" href="tel:0945919408" target="_top" data-call>📞 Gọi ngay</a>
+<div class="toast" id="toast"></div>
+<script>
+var $=function(i){return document.getElementById(i)};
+$('chk').onclick=function(){
+  var cap=+$('g').value,inc=parseFloat($('inc').value),h=$('h').value,p=$('p').value,r=$('r1'),m=[];
+  if(isNaN(inc)){r.className='res bad';r.textContent='Vui lòng nhập thu nhập hàng tháng.';return}
+  if(inc>cap)m.push('thu nhập vượt trần '+cap+' triệu/tháng');
+  if(h==='2')m.push('đã có nhà đủ diện tích tại nơi có dự án');
+  if(p==='1')m.push('đã từng hưởng chính sách nhà ở xã hội');
+  if(m.length){r.className='res bad';r.textContent='Có thể chưa đủ điều kiện mua: '+m.join('; ')+'. Liên hệ mình để được xem xét kỹ hơn, có thể bạn vẫn thuộc diện được thuê hoặc thuê mua.'}
+  else{r.className='res ok';r.textContent='Bạn có khả năng đủ điều kiện mua nhà ở xã hội. Bước tiếp theo: tính dòng tiền và chuẩn bị hồ sơ. Gọi 0945 919 408 để được rà soát giấy tờ.'}
+};
+function calc(){
+  var P=+$('pr').value,L=+$('lp').value/100,R=+$('rt').value/100/12,N=+$('yr').value*12;
+  if(!(P>0&&N>0)){$('pm').textContent='–';return}
+  var loan=P*L,pay=R>0?loan*R/(1-Math.pow(1+R,-N)):loan/N,own=P-loan+P*0.02;
+  var f=function(x){return x.toLocaleString('vi-VN',{maximumFractionDigits:1})};
+  $('pm').textContent='≈ '+f(pay)+' triệu/tháng';
+  $('ds').textContent='Vay khoảng '+f(loan)+' triệu. Vốn tự có ước tính '+f(own)+' triệu (phần còn lại + 2% phí bảo trì).';
+}
+['pr','lp','rt','yr'].forEach(function(i){$(i).oninput=calc});calc();
+var tt;
+Array.prototype.forEach.call(document.querySelectorAll('[data-call]'),function(a){
+  a.addEventListener('click',function(){
+    // Nếu thiết bị không mở được ứng dụng gọi (ví dụ máy tính), hiện số để người dùng tự gọi
+    setTimeout(function(){
+      if(document.hidden)return;
+      try{navigator.clipboard.writeText('0945919408')}catch(e){}
+      var t=$('toast');t.textContent='Số điện thoại: 0945 919 408 (đã sao chép)';t.style.display='block';
+      clearTimeout(tt);tt=setTimeout(function(){t.style.display='none'},4000);
+    },900);
+  });
+});
+</script>
+</body>
+</html>
